@@ -1,17 +1,19 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app" class="has-navbar-fixed-top">
+    <app-header style="marginBottom: 20px"/>
+    <app-game-collection />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Header from './components/sticky/Header'
+import Collection from './components/Game/Collection'
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  components:{
+    'app-header': Header,
+    'app-game-collection': Collection
   }
 }
 </script>
@@ -23,6 +25,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 10px;
 }
 </style>
