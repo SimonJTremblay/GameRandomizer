@@ -10,7 +10,7 @@
         <div class="media-left">
           <figure class="image is-48x48">
             <!-- <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image" /> -->
-            <font-awesome-icon :icon="['fas', 'fist-raised']" />
+            <vue-fontawesome :icon="['fas', 'fist-raised']" />
           </figure>
         </div>
         <div class="media-content">
@@ -21,15 +21,15 @@
 
       <div class="columns is-centered">
         <div class="column">
-            <font-awesome-icon :icon="['fas', 'users']" />
+            <vue-fontawesome :icon="['fas', 'users']" />
             {{ game.nbPlayers }}
         </div>
         <div class="column">
-            <font-awesome-icon :icon="['fas', 'hourglass']" />
+            <vue-fontawesome :icon="['fas', 'hourglass']" />
             {{ game.gameLength }}
         </div>
         <div class="column">
-            <font-awesome-icon :icon="['fas', 'skull']" />
+            <vue-fontawesome :icon="['fas', 'skull']" />
             {{ game.complexity }}
         </div>
       </div>
