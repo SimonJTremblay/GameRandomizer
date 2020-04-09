@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import Header from './components/sticky/Header'
+import Header from './components/Sticky/Header'
 import Collection from './components/Game/Collection'
 
 export default {
