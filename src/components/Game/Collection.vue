@@ -5,6 +5,7 @@
             v-for="(game,index) in collection"
             :key="index"
             :game="game"
+            @deleteGame="deleteGameFromCollection"
         />
     </div>
 </template>
@@ -63,7 +64,12 @@ export default {
     },
     components:{
         'app-game-card': GameCard,
-    },    
+    },
+    methods:{
+        deleteGameFromCollection(game){
+            alert(`${game.title} has been deleted`)
+        }
+    }
 }
 </script>
 
