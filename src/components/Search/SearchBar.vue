@@ -7,11 +7,11 @@
                 type="search"
                 icon="search"
                 size="is-large"
+                v-model="itemToSearch"
                 expanded>
-                {{ searchItem}}
             </b-input>
             <p class="control">
-                <button class="button is-primary is-large">Search</button>
+                <button class="button is-primary is-large" @click="searchForItem">Search</button>
             </p>
         </b-field>
     </section>
@@ -21,9 +21,14 @@
 export default {
     data: function() {
         return{
-            searchItem: ''
+            itemToSearch: ''
         };
-    }
+    },
+    methods:{
+        searchForItem(){
+            alert(`${this.itemToSearch} was searched!`);
+        }
+    },
     
 }
 </script>
