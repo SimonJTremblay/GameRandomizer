@@ -2,6 +2,12 @@
     <section>
         <div class="container">
             <form>
+                <section v-if="errors.length" class="container">
+                    <b>Please correct the following error(s):</b>
+                    <ul>
+                        <li v-for="(error, index) in errors" :key="index"> {{error}}</li>
+                    </ul>
+                </section>
                 <b-field label="Select Game">
                     <b-select placeholder="Select a game" v-model="selectedGame" expanded>
                         <option 
@@ -13,49 +19,47 @@
                         </option>
                     </b-select>
                 </b-field>
-            </form>
-            <div v-if="selectedGame">
-                <label for="nbPlayers">Number of players:</label>
-                <div class="block">
-                    <b-radio 
-                        v-for="n in playersRange" 
-                        :key="n"
-                        v-model="selectedNumberOfPlayers"
-                        name="nbPlayers"
-                        :native-value="n + (selectedGame.players.min - 1)"
-                    >
-                    {{ n + (selectedGame.players.min - 1) }}
-                    </b-radio>
-                </div>
-                <p class="content"> #players:  {{ selectedNumberOfPlayers }}</p>
-                <div class="block">
-                    <b-field grouped v-for="n in selectedNumberOfPlayers" :key="n">
-                        <app-friend-picker v-model="selectedFriends[n-1]" :friendList="friends"> </app-friend-picker>
-                        <b-field expanded>
-                            <b-input 
-                                placeholder="Score"
-                                type="number"
-                                v-model.number="score[n-1]">
-                            </b-input>
+                <div v-if="selectedGame">
+                    <label for="nbPlayers">Number of players:</label>
+                    <div class="block">
+                        <b-radio 
+                            v-for="n in playersRange" 
+                            :key="n"
+                            v-model="selectedNumberOfPlayers"
+                            name="nbPlayers"
+                            :native-value="n + (selectedGame.players.min - 1)"
+                        >
+                        {{ n + (selectedGame.players.min - 1) }}
+                        </b-radio>
+                    </div>
+                    <div class="block">
+                        <b-field grouped v-for="n in selectedNumberOfPlayers" :key="n">
+                            <app-friend-picker v-model="selectedFriends[n-1]" :friendList="friends"> </app-friend-picker>
+                            <b-field expanded>
+                                <b-input 
+                                    placeholder="Score"
+                                    type="number"
+                                    v-model.number="score[n-1]">
+                                </b-input>
+                            </b-field>
                         </b-field>
+                    </div>
+                    <b-field>
+                        <b-datepicker
+                            ref="datepicker"
+                            v-model="myDate"
+                            expanded
+                            editable
+                            placeholder="Select a date">
+                        </b-datepicker>
+                        <b-button
+                            @click="$refs.datepicker.toggle()"
+                            icon-left="calendar-day"
+                            type="is-primary" />
                     </b-field>
-                    <p class="content">Players: {{selectedFriends}}</p>
-                    <p class="content">Score: {{score}}</p>
+                    <b-button @click.prevent="checkForm" class="is-primary">Save</b-button>
                 </div>
-                <b-field>
-                    <b-datepicker
-                        ref="datepicker"
-                        expanded
-                        editable
-                        placeholder="Select a date">
-                    </b-datepicker>
-                    <b-button
-                        @click="$refs.datepicker.toggle()"
-                        icon-left="calendar-day"
-                        type="is-primary" />
-                </b-field>
-                <b-button class="is-primary">Save</b-button>
-            </div>
+            </form>
         </div>
     </section>
 </template>
@@ -123,8 +127,10 @@ export default {
             ],
             selectedFriends:[],
             score:[],
+            myDate: new Date(),
             selectedGame: '',
-            selectedNumberOfPlayers: -1
+            selectedNumberOfPlayers: -1,
+            errors:[],
         };
     },  // data
     computed:{
@@ -139,7 +145,29 @@ export default {
         selectedNumberOfPlayers(){
             this.selectedFriends = this.selectedFriends.slice(0,this.selectedNumberOfPlayers)
         }
-    }
+    },
+    methods:{
+        checkForm: function (e) {
+            this.errors = [];
+
+            if(!this.selectedGame){
+                this.errors.push("Select a game!");
+            }
+            if(this.score.length !== this.selectedNumberOfPlayers) {
+                this.errors.push("Enter the scores");
+            }
+            if(this.selectedFriends.length !== this.selectedNumberOfPlayers) {
+                this.errors.push("Enter all players.");
+            }
+
+            if (!this.errors.length) {
+                alert("all good!")
+                return true;
+            }
+
+            e.preventDefault();
+        }
+    },  // methods
 }
 </script>
 
