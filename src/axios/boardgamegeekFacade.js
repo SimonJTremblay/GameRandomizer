@@ -3,7 +3,7 @@ let convert = require('xml-js');
 
 export const HTTP = axios.create({
     baseURL:'https://www.boardgamegeek.com/xmlapi2',
-    timeout: 3000
+    timeout: 5000
 })
 
 export default{
@@ -24,4 +24,6 @@ export default{
     }
 }
 
-//Apparently the server will give you 500 or 503 return code, reporting that it is too busy.
+
+// Apparently if you send another request within 5 seconds of the previous one, 
+// the server will give you 500 or 503 return code, reporting that it is too busy.
