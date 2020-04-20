@@ -14,13 +14,25 @@
                 <button class="button is-primary is-large" @click="searchForItem">Search</button>
             </p>
         </b-field>
-        <div v-if="searchResult.length">
-                <h4>{{ searchResult.length }} records</h4>
-            Selected game: {{ selectedGame.name._attributes.value }}
+        <div class="container" v-if="searchResult">
+            <b-field v-if="selectedGame" grouped>
+                <button class="button field is-danger" @click="selectedGame = null">
+                    <b-icon icon="times"></b-icon>
+                </button>
+                <button class="button field is-primary" @click="addGameToLibrary">
+                    <span>Add</span>
+                </button>
+                <p class="control">
+                    Selected game: {{ selectedGame.name._attributes.value }}
+                </p>
+            </b-field>
             <b-table class="table"
                 :data="searchResult"
                 :columns="columns"
                 :selected.sync="selectedGame">
+            <template v-slot:empty>
+                Oh no!, nothing was found!
+            </template>
             </b-table>
         </div>
     </section>
@@ -32,8 +44,8 @@ export default {
     data() {
         return{
             itemToSearch: '',
-            searchResult:[],
-            selectedGame:'',
+            searchResult:null,
+            selectedGame: null,
             columns:[
                 {
                     field: 'name._attributes.value',
@@ -50,9 +62,11 @@ export default {
     methods:{
         async searchForItem(){
             let res = await bggApi.GetSearchItem(this.itemToSearch);
-            this.searchResult = res.items.item;
+            this.searchResult = res.items._attributes.total !== "0" ? res.items.item: [];
+        },
+        addGameToLibrary(){
+            console.log(`${this.selectedGame.name._attributes.value} was added.`)
         }
-    },
-    
+    },    
 }
 </script>

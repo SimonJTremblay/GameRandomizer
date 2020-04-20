@@ -2,10 +2,10 @@ import Vue from 'vue'
 import App from './App.vue'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faFistRaised, faUsers, faSkull, faHourglass, faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faFistRaised, faUsers, faSkull, faHourglass, faSearch, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-library.add(faFistRaised,faUsers,faSkull,faHourglass, faSearch);
+library.add(faFistRaised,faUsers,faSkull,faHourglass, faSearch, faTimes);
 Vue.component('vue-fontawesome', FontAwesomeIcon);
 
 
