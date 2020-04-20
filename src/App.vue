@@ -1,6 +1,13 @@
 <template>
   <div id="app" class="has-navbar-fixed-top">
-    <app-header style="marginBottom: 20px"/>
+    <app-header style="marginBottom: 20px" @recordGame="isComponentModalActive = true"/>
+        <b-modal :active.sync="isComponentModalActive"
+                  has-modal-card
+                  trap-focus
+                  aria-role="dialog"
+                  aria-modal>
+            <app-record-game-modal />
+        </b-modal>
     <app-game-collection />
   </div>
 </template>
@@ -8,12 +15,19 @@
 <script>
 import Header from './components/Sticky/Header'
 import Collection from './components/Game/Collection'
+import RecordGameModal from './components/Game/RecordGameModal'
 
 export default {
   name: 'App',
   components:{
     'app-header': Header,
-    'app-game-collection': Collection
+    'app-game-collection': Collection,
+    'app-record-game-modal': RecordGameModal,
+  },
+  data() {
+    return {
+      isComponentModalActive: false,
+    }
   }
 }
 </script>

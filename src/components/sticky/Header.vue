@@ -22,7 +22,7 @@
                 Collection
             </b-navbar-item>
             <div class="buttons">
-                <a class="button is-primary">
+                <a class="button is-primary" @click="recordGame">
                     <strong>Record a Game</strong>
                 </a>
             </div>
@@ -44,7 +44,11 @@
 </template>
 
 <script>
-export default {
-    
+export default { 
+    methods:{
+        recordGame() {
+            this.$emit('recordGame');
+        }
+    }  
 }
 </script>
