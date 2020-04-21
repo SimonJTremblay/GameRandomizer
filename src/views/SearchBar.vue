@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import bggApi from '../../axios/boardgamegeekFacade'
+import bggApi from '../axios/boardgamegeekFacade'
 export default {
     data() {
         return{
