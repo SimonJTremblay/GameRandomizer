@@ -16,8 +16,6 @@
 <script>
 import Header from './components/Sticky/Header'
 import RecordGameModal from './components/Game/RecordGameModal'
-import SearchBar from './components/Search/SearchBar'
-
 export default {
   name: 'App',
   components:{
