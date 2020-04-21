@@ -8,20 +8,19 @@
                   aria-modal>
             <app-record-game-modal />
         </b-modal>
-    <app-game-collection />
+    <!-- component matched by the route will render here -->
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 import Header from './components/Sticky/Header'
-import Collection from './components/Game/Collection'
 import RecordGameModal from './components/Game/RecordGameModal'
 
 export default {
   name: 'App',
   components:{
     'app-header': Header,
-    'app-game-collection': Collection,
     'app-record-game-modal': RecordGameModal,
   },
   data() {
