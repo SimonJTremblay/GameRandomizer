@@ -12,14 +12,20 @@
             </b-navbar-item>
         </template>
         <template slot="start">
-            <b-navbar-item href="#">
-                Home
+            <b-navbar-item>
+                <router-link :to="{ name: 'Home'}">
+                    Home
+                </router-link>
             </b-navbar-item>
-            <b-navbar-item href="#">
-                Search for Games
+            <b-navbar-item>
+                <router-link :to="{ name: 'Search'}">
+                    Search for Games
+                </router-link>
             </b-navbar-item>
-            <b-navbar-item href="#">
-                Collection
+            <b-navbar-item>
+                <router-link :to="{ name: 'Collection'}">
+                    Collection
+                </router-link>
             </b-navbar-item>
             <div class="buttons">
                 <a class="button is-primary" @click="recordGame">
