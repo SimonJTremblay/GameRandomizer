@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import GameCard from './GameCard.vue'
+import GameCard from '../components/Game/GameCard'
 export default {
     data: function() {
         return {
