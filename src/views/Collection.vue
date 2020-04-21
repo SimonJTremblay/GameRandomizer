@@ -5,12 +5,13 @@
             v-for="(game,index) in collection"
             :key="index"
             :game="game"
+            @deleteGame="deleteGameFromCollection"
         />
     </div>
 </template>
 
 <script>
-import GameCard from './GameCard.vue'
+import GameCard from '../components/Game/GameCard'
 export default {
     data: function() {
         return {
@@ -63,7 +64,12 @@ export default {
     },
     components:{
         'app-game-card': GameCard,
-    },    
+    },
+    methods:{
+        deleteGameFromCollection(game){
+            alert(`${game.title} has been deleted`)
+        }
+    }
 }
 </script>
 
