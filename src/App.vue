@@ -16,7 +16,6 @@
 <script>
 import Header from './components/Sticky/Header'
 import RecordGameModal from './components/Game/RecordGameModal'
-
 export default {
   name: 'App',
   components:{
