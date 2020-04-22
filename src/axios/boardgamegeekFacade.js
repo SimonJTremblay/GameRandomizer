@@ -17,10 +17,17 @@ export default{
     GetSearchItem(searchItem){
         return this.execute('GET',`/search?query=${searchItem}`)
             .then(req => {
-                let res = convert.xml2json(req.data, {compact:true, spaces: 4})
+                let res = convert.xml2json(req.data, {compact:true, spaces: 4});
                 return JSON.parse(res);
             })
             .catch( error => console.log(error))
+    },
+    getSelectedGame(selectedGameId){
+        return this.execute('GET',`/thing?id=${selectedGameId}`)
+            .then (req => {
+                let res = convert.xml2json(req.data, {compact:true, spaces: 4});
+                return JSON.parse(res);
+            })
     }
 }
 
