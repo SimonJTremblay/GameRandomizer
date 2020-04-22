@@ -24,8 +24,7 @@
           <b-field label="Password">
               <b-input 
                   type="password"
-                  v-model="password"
-                  password-reveal>
+                  v-model="password">
               </b-input>
           </b-field>
       </section>

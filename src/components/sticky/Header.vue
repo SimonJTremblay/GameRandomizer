@@ -4,29 +4,23 @@
         class="is-spaced"
         >
         <template slot="brand">
-            <b-navbar-item tag="router-link" :to="{ path: '/' }">
+            <b-navbar-item tag="router-link" :to="{ name:'Home' }">
                 <img
-                    src="https://raw.githubusercontent.com/buefy/buefy/dev/static/img/buefy-logo.png"
-                    alt="Lightweight UI components for Vue.js based on Bulma"
+                    src="@/assets/logo.png"
+                    alt="Pocket Rocket is a boardgame collection and randomizer management app"
                 >
             </b-navbar-item>
         </template>
         <template slot="start">
-            <b-navbar-item>
-                <router-link :to="{ name: 'Home'}">
-                    Home
+                <router-link :to="{ name: 'Home'}" tag="b-navbar-item">
+                        Home
                 </router-link>
-            </b-navbar-item>
-            <b-navbar-item>
-                <router-link :to="{ name: 'Search'}">
-                    Search for Games
+                <router-link :to="{ name: 'Search'}" tag="b-navbar-item">
+                        Search
                 </router-link>
-            </b-navbar-item>
-            <b-navbar-item>
-                <router-link :to="{ name: 'Collection'}">
-                    Collection
+                <router-link :to="{ name: 'Collection'}" tag="b-navbar-item">
+                        Collection
                 </router-link>
-            </b-navbar-item>
             <div class="buttons">
                 <a class="button is-primary" @click="recordGame">
                     <strong>Record a Game</strong>
