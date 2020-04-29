@@ -42,6 +42,8 @@
 
 <script>
 import bggApi from '../axios/boardgamegeekFacade'
+import gameApi from '../axios/gameFacade'
+
 export default {
     data() {
         return{
@@ -67,13 +69,16 @@ export default {
             this.searchResult = res.items._attributes.total !== "0" ? res.items.item: [];
         },
         async addGameToLibrary(){
-            let game = await bggApi.getSelectedGame(this.selectedGame._attributes.id);
+            const game = await bggApi.getSelectedGame(this.selectedGame._attributes.id);
             console.log(game);
+            //collectionApi.postGameToDatabase(game);
+            const answ = gameApi.postGameToDatabase(game);
+            console.log(answ);
             this.$buefy.toast.open({
                 message: 'Something happened correctly!',
                 type: 'is-success'
             })
         }
-    },    
+    },
 }
 </script>
