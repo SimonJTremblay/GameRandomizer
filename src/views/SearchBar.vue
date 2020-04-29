@@ -29,10 +29,12 @@
             <b-table class="table"
                 :data="searchResult"
                 :columns="columns"
-                :selected.sync="selectedGame">
-            <template v-slot:empty>
-                Oh no!, nothing was found!
-            </template>
+                :selected.sync="selectedGame"
+                paginated
+                per-page="20">
+                <template v-slot:empty>
+                    Oh no!, nothing was found!
+                </template>
             </b-table>
         </div>
     </section>
@@ -40,6 +42,8 @@
 
 <script>
 import bggApi from '../axios/boardgamegeekFacade'
+import gameApi from '../axios/gameFacade'
+
 export default {
     data() {
         return{
@@ -64,9 +68,17 @@ export default {
             let res = await bggApi.GetSearchItem(this.itemToSearch);
             this.searchResult = res.items._attributes.total !== "0" ? res.items.item: [];
         },
-        addGameToLibrary(){
-            console.log(`${this.selectedGame.name._attributes.value} was added.`)
+        async addGameToLibrary(){
+            const game = await bggApi.getSelectedGame(this.selectedGame._attributes.id);
+            console.log(game);
+            //collectionApi.postGameToDatabase(game);
+            const answ = gameApi.postGameToDatabase(game);
+            console.log(answ);
+            this.$buefy.toast.open({
+                message: 'Something happened correctly!',
+                type: 'is-success'
+            })
         }
-    },    
+    },
 }
 </script>

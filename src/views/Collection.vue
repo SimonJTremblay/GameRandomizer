@@ -12,55 +12,13 @@
 
 <script>
 import GameCard from '../components/Game/GameCard'
+import CollectionApi from '../axios/collectionFacade.js'
+
 export default {
     data: function() {
         return {
-            collection:
-            [
-                {
-                    title: 'Smash up',
-                    publishers: 'Alderac Entertainment Group',
-                    nbPlayers: '2-4',
-                    gameLength: '60-90',
-                    complexity: '3/5'
-                },
-                {
-                    title: 'Legendary',
-                    publishers: 'Upper Deck Entertainment',
-                    nbPlayers: '1-5',
-                    gameLength: '30-60',
-                    complexity: '2/5'
-                },
-                {
-                    title: 'Ankh: Gods of Egypt',
-                    publishers: 'CMON Limited',
-                    nbPlayers: '2-5',
-                    gameLength: 'N/A',
-                    complexity: '4/5'
-                },
-                {
-                    title: 'Smash up',
-                    publishers: 'Alderac Entertainment Group',
-                    nbPlayers: '2-4',
-                    gameLength: '60-90',
-                    complexity: '3/5'
-                },
-                {
-                    title: 'Legendary',
-                    publishers: 'Upper Deck Entertainment',
-                    nbPlayers: '1-5',
-                    gameLength: '30-60',
-                    complexity: '2/5'
-                },
-                {
-                    title: 'Ankh: Gods of Egypt',
-                    publishers: 'CMON Limited',
-                    nbPlayers: '2-5',
-                    gameLength: 'N/A',
-                    complexity: '4/5'
-                },
-            ]
-        };
+            collection: null,
+        }
     },
     components:{
         'app-game-card': GameCard,
@@ -68,8 +26,16 @@ export default {
     methods:{
         deleteGameFromCollection(game){
             alert(`${game.title} has been deleted`)
+        },
+        async getCollection(){
+           const user = await CollectionApi.getGameCollection(); 
+           this.collection = user.gameList;
         }
-    }
+    },  // methods
+    async created(){
+        this.getCollection();
+    },  // created
+
 }
 </script>
 

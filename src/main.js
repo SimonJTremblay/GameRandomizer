@@ -5,14 +5,14 @@ import router from './router'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {  faFistRaised, faUsers, faSkull, faHourglass, faSearch, 
           faTrash, faPlusSquare, faCalendarDay, faAngleLeft, faAngleRight,
-          faUser, faTimesCircle
+          faUser, faTimesCircle, faTimes
         } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 library.add(
     faFistRaised,faUsers,faSkull,faHourglass, faSearch,
     faTrash,faPlusSquare,faCalendarDay, faAngleLeft, faAngleRight,
-    faUser,faTimesCircle
+    faUser,faTimesCircle, faTimes
     );
 Vue.component('vue-fontawesome', FontAwesomeIcon);
 

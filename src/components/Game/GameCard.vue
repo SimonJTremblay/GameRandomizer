@@ -2,7 +2,7 @@
   <div class="card">
     <div class="card-image">
       <figure class="image is-4by3">
-        <img src="../../assets/logo.png" alt="Placeholder image" />
+        <img :src="game.media.image" alt="Image is not available" />
       </figure>
     </div>
     <div class="card-content">
@@ -15,21 +15,21 @@
         </div>
         <div class="media-content">
           <p class="title is-4">{{ game.title }}</p>
-          <p class="subtitle is-6">{{ game.publishers }}</p>
+          <p class="subtitle is-6">{{ game.yearPublished }}</p>
         </div>
       </div>
       <div class="columns is-centered">
         <div class="column">
             <vue-fontawesome :icon="['fas', 'users']" />
-            {{ game.nbPlayers }}
+            {{ game.players.min }} - {{ game.players.max }}
         </div>
         <div class="column">
             <vue-fontawesome :icon="['fas', 'hourglass']" />
-            {{ game.gameLength }}
+            {{ game.playtime.min === game.playtime.max ? `${game.playtime.min}`: `${game.playtime.min} - ${game.playtime.max}`}}
         </div>
         <div class="column">
             <vue-fontawesome :icon="['fas', 'skull']" />
-            {{ game.complexity }}
+            {{ game.bggId }}
         </div>
       </div>
       <div class="buttons is-centered">
@@ -44,16 +44,24 @@
 export default {
     props: {
       game:{
-          type: Object,
-          default: function() {
-              return{
-                  title: 'N/A',
-                  publishers: 'N/A',
-                  nbPlayers: 'N/A',
-                  gameLength: 'N/A',
-                  complexity: 'N/A',                
-              };
-          }
+          bggId:   Number,
+          title:  {type: String, required:true},
+          yearPublished: Number ,
+          media:{
+              thumbnail: String,
+              image: String
+          },
+          players:{
+              min: {type: Number, min: 0},
+              max: {type: Number}
+          },
+          playtime:{
+              min: {type: Number, min: 0},
+              max: {type: Number}
+          },
+          expansions: [{id: Number, value: String, owned: {type: Boolean, default: false} }],    
+          categories: [{id: Number, value: String}],
+          mechanics:  [{id: Number, value: String}],
       }
     }, // /props
     methods:{
