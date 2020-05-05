@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import Header from './components/Sticky/Header'
+import Header from './components/sticky/Header'
 import RecordGameModal from './components/Game/RecordGameModal'
 export default {
   name: 'App',
