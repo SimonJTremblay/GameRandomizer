@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { TEST_USER_ID } from '../constants'
 // let convert = require('xml-js');
 
 export const HTTP = axios.create({
@@ -18,6 +19,6 @@ export default{
           })
     },
     postGameToDatabase(game){
-        return this.execute('POST',`/${'5ea84cba73133255a8959863'}`, game)
+        return this.execute('POST',`/${TEST_USER_ID}`, game)
     }
 }
