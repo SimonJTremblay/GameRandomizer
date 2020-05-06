@@ -20,5 +20,8 @@ export default{
     },
     getGameCollection(){
         return this.execute('GET', `/${TEST_USER_ID}`)
+    },
+    postGameToDatabase(game){
+        return this.execute('POST',`/${TEST_USER_ID}`, game)
     }
 }
