@@ -19,6 +19,7 @@ Vue.component('vue-fontawesome', FontAwesomeIcon);
 
 import Buefy from 'buefy'
 import 'buefy/dist/buefy.css'
+import store from './store'
 Vue.use(Buefy, {
   defaultIconComponent: 'vue-fontawesome',
   defaultIconPack: 'fas',
@@ -28,5 +29,6 @@ Vue.config.productionTip = false
 
 new Vue({
   router,
+  store,
   render: h => h(App)
 }).$mount('#app')
