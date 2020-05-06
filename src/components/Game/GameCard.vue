@@ -1,5 +1,12 @@
 <template>
   <div class="card">
+     <b-modal :active.sync="isComponentModalActive"
+              has-modal-card
+              trap-focus
+              aria-role="dialog"
+              aria-modal>
+        <app-record-game-modal :game="game"/>
+      </b-modal>
     <div class="card-image">
       <figure class="image is-4by3">
         <img :src="game.media.image" alt="Image is not available" />
@@ -33,7 +40,12 @@
         </div>
       </div>
       <div class="buttons is-centered">
-        <b-button type="is-primary" icon-left="plus-square">Record</b-button>
+        <b-button 
+          type="is-primary"
+          icon-left="plus-square"
+          @click="isComponentModalActive = true">
+          Record
+        </b-button>
         <b-button type="is-danger" icon-left="trash" @click="deleteGame">Delete</b-button>
       </div>
     </div>
@@ -41,7 +53,12 @@
 </template>
 
 <script>
+import RecordGameModal from '../Game/RecordGameModal'
+
 export default {
+    components: {
+      'app-record-game-modal': RecordGameModal
+    },
     props: {
       game:{
           bggId:   Number,
@@ -69,6 +86,11 @@ export default {
         this.$emit('deleteGame', this.game)
       }
     }, // /methods
+    data(){
+      return{
+        isComponentModalActive: false
+      }
+    } // data
 };
 </script>
 

@@ -75,41 +75,12 @@ export default {
           type: Object,
         }
     },  // props
+    created(){
+        this.selectedGame = this.game ?? '';
+        this.selectedNumberOfPlayers = this.game?.players.min ?? -1;
+    },
     data: function() {
         return {
-            collection:
-            [
-                {
-                    title: 'Smash up',
-                    publishers: 'Alderac Entertainment Group',
-                    players: {
-                        min:2,
-                        max:5
-                    },
-                    gameLength: '60-90',
-                    complexity: '3/5'
-                },
-                {
-                    title: 'Legendary',
-                    publishers: 'Upper Deck Entertainment',
-                    players: {
-                        min:1,
-                        max:5
-                    },
-                    gameLength: '30-60',
-                    complexity: '2/5'
-                },
-                {
-                    title: 'Ankh: Gods of Egypt',
-                    publishers: 'CMON Limited',
-                    players: {
-                        min:2,
-                        max:5
-                    },
-                    gameLength: 'N/A',
-                    complexity: '4/5'
-                }
-            ],
             friends:
             [
                 {
@@ -137,6 +108,9 @@ export default {
         playersRange(){
             return this.selectedGame.players.max - this.selectedGame.players.min + 1;   // inclusive of max number
         },
+        collection(){
+            return this.$store.state.gameList;
+        }
     },  // computed
     watch: {
         selectedGame(){

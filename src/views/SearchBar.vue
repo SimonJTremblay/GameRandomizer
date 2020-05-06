@@ -42,7 +42,8 @@
 
 <script>
 import bggApi from '../axios/boardgamegeekFacade'
-import gameApi from '../axios/gameFacade'
+import collectionApi from '../axios/collectionFacade'
+import { mapActions } from 'vuex'
 
 export default {
     data() {
@@ -70,15 +71,25 @@ export default {
         },
         async addGameToLibrary(){
             const game = await bggApi.getSelectedGame(this.selectedGame._attributes.id);
-            console.log(game);
-            //collectionApi.postGameToDatabase(game);
-            const answ = gameApi.postGameToDatabase(game);
-            console.log(answ);
-            this.$buefy.toast.open({
-                message: 'Something happened correctly!',
-                type: 'is-success'
-            })
-        }
-    },
+            const answ = await collectionApi.postGameToDatabase(game)
+            if(answ){
+                this.$buefy.toast.open({
+                    message: 'Something happened correctly!',
+                    type: 'is-success'
+                })
+                // update state
+                this.addGameToList(answ.gameList[answ.gameList.length - 1])
+            }
+            else{
+                this.$buefy.toast.open({
+                    message: 'Something bad happened!',
+                    type: 'is-danger'
+                })
+            }
+        },
+        ...mapActions([
+            'addGameToList'
+        ])
+    },  // methods
 }
 </script>
